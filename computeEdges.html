@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>COMPUTE MST</title>
+</head>
+<body>
+    <h1>ENTER EDGES</h1>
+    <form id="inputDiv">
+        
+    </form>
+    <script>
+        //event listeners for the edge inputs after the algorithm and number of edges are selected
+        window.addEventListener('pywebviewready', async function() {
+            //json's primary purpose is to make sure everything is in a string format suitable for the terminal
+            const data = JSON.parse(await window.pywebview.api.getdata());
+            const numberOfEdges = Number(data.numberOfEdges);
+            const inputDiv = document.getElementById("inputDiv");
+            //loops through to get the from node, to node and edge weight for the same amount of times as the number of edges
+            for (let i = 0;i < numberOfEdges; i++){
+                let fromNodeLabel = document.createElement("label");
+                fromNodeLabel.setAttribute("for", `${i}fromNode`);
+                fromNodeLabel.textContent = "Input From Node: ";
+                inputDiv.appendChild(fromNodeLabel);
+                let fromNodeInput = document.createElement("input");
+                fromNodeInput.type = "text";
+                fromNodeInput.name = `${i}fromNode`;
+                inputDiv.appendChild(fromNodeInput);
+
+                let toNodeLabel = document.createElement("label");
+                toNodeLabel.setAttribute("for", `${i}toNode`);
+                toNodeLabel.textContent = "Input To Node: ";
+                inputDiv.appendChild(toNodeLabel);
+                let toNodeInput = document.createElement("input");
+                toNodeInput.type = "text";
+                toNodeInput.name = `${i}toNode`;
+                inputDiv.appendChild(toNodeInput);
+
+                let edgeWeightLabel = document.createElement("label");
+                edgeWeightLabel.setAttribute("for", `${i}edgeWeight`);
+                edgeWeightLabel.textContent = "Input Edge Weight: ";
+                inputDiv.appendChild(edgeWeightLabel);
+                let edgeWeightInput = document.createElement("input");
+                edgeWeightInput.type = "number";
+                edgeWeightInput.name = `${i}edgeWeight`;
+                inputDiv.appendChild(edgeWeightInput);
+            }
+            //this part helps to move to computeEdges.html from inputs.html
+            let submitButton = document.createElement("input");
+            submitButton.type = "submit";
+            submitButton.value = "Submit";
+            inputDiv.appendChild(submitButton);
+            inputDiv.addEventListener("submit", async function(){
+                await window.pywebview.api.runalg(Object.fromEntries(new FormData(inputDiv).entries()));
+            });
+        });
+    </script>
+</body>
+</html>

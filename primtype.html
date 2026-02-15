@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input</title>
+</head>
+<body>
+    <h1>Input Page</h1>
+    <!--Page input for type of Prim's algorithm-->
+    <form id="form">
+            <label for="algorithm">Choose an something:</label>
+            <select id="algorithm" name="algorithm">
+              <option value="">-- Please choose an option --</option>
+              <option value="graph">graph</option>
+              <option value="matrix">matrix</option>
+            </select>
+
+        <button type="submit">Submit</button>
+    </form>
+    <!--Event listener for the submit button-->
+    <script>
+        window.addEventListener('pywebviewready', function() {
+            document.getElementById('form').onsubmit = function(e) {
+                //random event when pressing the submit button
+                e.preventDefault();
+                window.pywebview.api.submitPrimType(document.getElementById("algorithm").value);
+            };
+        });
+    </script>
+</body>
+</html>

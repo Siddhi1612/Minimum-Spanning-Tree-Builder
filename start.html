@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start</title>
+</head>
+<body>
+    <!--Initial start page-->
+    <h1>MST Learning Tool</h1>
+    <p>Made by: Siddhi Palli</p>
+    <button id="start_button">START</button>
+    <!--Event listener for the start button-->
+    <script>
+        window.addEventListener('pywebviewready', function() {
+            document.getElementById('start_button').onclick = function() {
+                window.pywebview.api.loadinputs();
+            };
+        });
+    </script>
+</body>
+</html>

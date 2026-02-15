@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input</title>
+</head>
+<body>
+    <h1>Input Page</h1>
+    
+    <form id="form">
+            <label for="algorithm">Choose an algorithm:</label>
+            <select id="algorithm" name="algorithm">
+              <option value="">-- Please choose an option --</option>
+              <option value="kruskal">Kruskal</option>
+              <option value="prim">Prim</option>
+            </select>
+
+        <label>Number of edges:</label><br>
+        <input type="number" id="edges"><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        window.addEventListener('pywebviewready', function() {
+            document.getElementById('form').onsubmit = function(e) {
+                e.preventDefault();
+                
+                var data = {
+                    userAlgorithm: document.getElementById('algorithm').value,
+                    numberOfEdges: document.getElementById('edges').value
+                };
+                
+                window.pywebview.api.submitInput(data);
+            };
+        });
+    </script>
+</body>
+</html>
+
